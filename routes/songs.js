@@ -1,19 +1,21 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
 var User = require('../models/user');
-var LocalStrategy = require('passport-local').Strategy;
+var Song = require('../models/song');
 
-/* User Register */
-router.get('/register', function(req, res, next) {
-    res.render('users/register');
+router.get('/', function(req, res, next) {
+    res.render('songs/latest');
+});
+
+router.get('upload', function(req, res, next) {
+    res.render('songs/upload');
 });
 
 // Register User
-router.post('/register', function(req, res, next) {
+router.post('/upload', function(req, res, next) {
   
     // Get input values
-    var firstName   = req.body.firstName;
+    var songName   = req.body.firstName;
     var lastName    = req.body.lastName;
     var email       = req.body.email;
     var username    = req.body.username;
