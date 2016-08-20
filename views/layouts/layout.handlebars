@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sona.io</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="" />
+    <meta name="copyright" content="" />
+    <link rel="stylesheet" type="text/css" href="/css/kickstart.css" media="all" />                  
+    <link rel="stylesheet" type="text/css" href="/css/style.css" media="all" />                      
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/kickstart.js"></script>                                 
+</head>
+<body>
+    <!-- Menu Horizontal -->
+    <ul class="menu">
+        <li class="current"><a href="/">Home</a></li>
+        <li><a href="/profile">Your Profile</a></li>
+    </ul>
+
+    <!-- Grid -->
+    <div class="grid"> 
+        <div class="col_12">
+	        <div class="col_9">
+				{{#if success_msg}}
+					<div class="notice success"><i class="icon-remove-sign icon-large"></i> 
+					{{success_msg}}
+						<a href="#close" class="icon-remove"></a>
+					</div>
+				{{/if}}
+
+				{{#if error_msg}}
+					<div class="notice error"><i class="icon-remove-sign icon-large"></i> 
+					{{error_msg}}
+						<a href="#close" class="icon-remove"></a>
+					</div>
+				{{/if}}
+
+				{{#if error}}
+					<div class="notice error"><i class="icon-remove-sign icon-large"></i> 
+					{{error}}
+						<a href="#close" class="icon-remove"></a>
+					</div>
+				{{/if}}
+
+	            {{{body}}}
+	        </div>
+	        <div class="col_3">
+	            {{>login}}
+	        </div>
+	
+	<hr />
+	
+	<div class="col_3">
+	<h4>Column</h4>
+	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore 
+	magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis</p>
+	</div>
+	
+	<div class="col_3">
+	<h4>Column</h4>
+	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore 
+	magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis</p>
+	</div>
+	
+	<div class="col_3">
+	<h4>Column</h4>
+	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore 
+	magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis</p>
+	</div>
+	
+	<div class="col_3">
+	<h4>Column</h4>
+	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore 
+	magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis</p>
+	</div>
+</div>
+
+</div><!-- END GRID -->
+
+    <!-- ===================================== START FOOTER ===================================== -->
+    <div class="clear"></div>
+    <div id="footer">
+        &copy; Copyright 2016 All Rights Reserved. Sona.io
+    </div>
+</body>
+</html>
