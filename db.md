@@ -1,13 +1,15 @@
 # Creat Users Table
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(20) DEFAULT NULL,
-  `last_name` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `username` varchar(100) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+```
+CREATE TABLE users (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  first_name varchar(20) DEFAULT NULL,
+  last_name varchar(20) DEFAULT NULL,
+  email varchar(100) DEFAULT NULL,
+  username varchar(100) DEFAULT NULL,
+  password varchar(100) DEFAULT NULL,
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8
+```
 
 # Create Songs Table
 CREATE TABLE `songs` (
