@@ -27,6 +27,7 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "moment": "^2.14.1",
     "morgan": "*",
     "multer": "^1.2.0",
     "mysql": "*",

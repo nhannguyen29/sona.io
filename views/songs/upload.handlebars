@@ -1,0 +1,25 @@
+<h3>Upload Songs!</h3>
+{{#if errors}}
+    {{#each errors}}
+	    <div class="notice error"><i class="icon-remove-sign icon-large"></i> {{msg}}
+			<a href="#close" class="icon-remove"></a>
+		</div>
+	{{/each}}
+{{/if}}
+<form id="uploadForm" method="post" action="/songs/upload">
+	<div>
+		<label>Song name: </label>
+		<input type="text" name="song_name" value="{{song_name}}">
+	</div><br />
+	<div>
+		<label>Type: </label>
+		<input type="text" name="type" value="{{type}}">
+	</div><br />
+	<div>
+		<label>Song URL:</label>
+		<input type="text" name="url" value="{{url}}">
+	</div><br />
+	<div>
+		<input type="submit" value="Upload">
+	</div>
+</form>

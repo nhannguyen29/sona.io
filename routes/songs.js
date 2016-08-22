@@ -2,101 +2,50 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Song = require('../models/song');
+var passport = require('passport');
 
 router.get('/', function(req, res, next) {
     res.render('songs/latest');
 });
 
-router.get('upload', function(req, res, next) {
+router.get('/upload', function(req, res, next) {
     res.render('songs/upload');
 });
 
 // Register User
 router.post('/upload', function(req, res, next) {
-  
+    
     // Get input values
-    var songName   = req.body.firstName;
-    var lastName    = req.body.lastName;
-    var email       = req.body.email;
-    var username    = req.body.username;
-    var password    = req.body.password;
-    var password2   = req.body.password2;
+    var user_id = req.user.id;
+    var songName = req.body.song_name;
+    var urlType = req.body.type;
+    var url      = req.body.url;
 
     // Form Validation
-    req.checkBody('firstName', 'First name is required').notEmpty();
-    req.checkBody('lastName' , 'Last name name is required').notEmpty();
-    req.checkBody('email'    , 'Email is required').notEmpty();
-    req.checkBody('username' , 'Username is required').notEmpty();
-    req.checkBody('password' , 'Password is required').notEmpty();  
-    req.checkBody('password2', 'Confirm password does not match').equals(req.body.password);
-
+    req.checkBody('song_name', 'Song needs a name.').notEmpty();
+    req.checkBody('type', 'Need a type.').notEmpty();
+    req.checkBody('url'     , 'Need a url.').notEmpty();
     errors = req.validationErrors();
 
     if (errors) {
-        res.render('users/register', {
+        res.render('songs/upload', {
             errors: errors
         });
     }
     else {
-        console.log('Registering new user...');
-        var newUser = new User(firstName, lastName, email, username, password);
-        User.saveUser(newUser, function(err, result){
-            if (err) {
-                console.log(err);
-            }
-            else {
-                console.log("New user is added");
-                console.log('Result: ' + result);
-            }
-        });   
-        req.flash('success_msg', "You have successfully registered. Please log in");
+        console.log('Uploading new song...');
+        var date = new Date();
+        var newSong = new Song(user_id, songName, url, urlType, date);
+        Song.saveSong(newSong, function(err, result){
+            if (err) console.log(err);
+            else  {
+                console.log("New song is added.\n");
+                console.log("Result: " + result);
+            };
+        });
+        req.flash('success_msg', "You have successfully uploaded the song.");
         res.redirect('/');        
     }
-});
-
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
-
-
-passport.deserializeUser(function(id, done) {
-    User.getUserById(id, function (err, user) {
-        done(err, user);
-    });
-});
-
-router.post('/login', passport.authenticate('local', {failureRedirect:'/', failureFlash: true}), function(req,res,next) {
-    req.flash('success_msg', "You are now logged in");
-    res.redirect('/songs');
-});
-
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-  	    User.getUserByUsername(username, function(err, user){
-    	    if (err) throw err;
-    	    if(!user){
-    		    return done(null, false, { message: 'Unknown user ' + username }); 
-    	    }
-
-    	    User.comparePassword(password, user.password, function(err, isMatch) {
-      		    if (err) return done(err);
-      		    if(isMatch) {
-        		    return done(null, user);
-      		    } else {
-      			    console.log('Invalid Password');
-      			    // Success Message
-        		    return done(null, false, { message: 'Invalid password' });
-      		    }
-   	 	    });
-        });
-    }
-));
-
-router.get('/logout', function (req, res) {
-    req.logout();
-    // Success message
-    req.flash('success_msg', "You have logged out");
-    res.redirect('/');
 });
 
 module.exports = router;
