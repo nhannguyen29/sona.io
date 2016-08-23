@@ -1,11 +1,4 @@
-var mysql = require('mysql');
-var moment = require('moment');
-var conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Figara1996',
-    database: 'sona_io'
-});
+var conn = require('../db');
 
 function twoDigits(d) {
     if (0 <= d && d < 10) return "0" + d.toString();

@@ -1,20 +1,5 @@
 var bcrypt = require('bcryptjs');
-var mysql = require('mysql');
-var conn = mysql.createConnection({
-    host:       'localhost',
-    user:       'root',
-    password:   'Figara1996',
-    database:   'sona_io'  
-});
-
-conn.connect(function(err) {
-    if (err) {
-        console.log('Error: ' + err);
-    }
-    else {
-        console.log('Database successfully connected');
-    }
-});
+var conn = require('../db');
 
 var User = function (firstName, lastName, email, username, password) {
     this.firstName  = firstName;
