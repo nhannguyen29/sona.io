@@ -3,13 +3,8 @@ var moment = require('moment');
 var conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '261094na',
+    password: 'Figara1996',
     database: 'sona_io'
-});
-
-conn.connect(function (err) {
-    if (err) console.log('Error: ' + err + '\n');
-    else console.log('Database successfully connected.\n');
 });
 
 function twoDigits(d) {
@@ -18,15 +13,14 @@ function twoDigits(d) {
     return d.toString();
 }
 
-toMysqlFormat = function () {
+var toMysqlFormat = function () {
     var date = Date();
     return date.getUTCFullYear() + "-" + twoDigits(1 + date.getUTCMonth()) + "-" + twoDigits(date.getUTCDate()) + " " + twoDigits(date.getUTCHours()) + ":" + twoDigits(date.getUTCMinutes()) + ":" + twoDigits(date.getUTCSeconds());
 };
 
-var Song = function (user_id, name, url, url_type, uploadedDate) {
+var Song = function (user_id, name, url, uploadedDate) {
     this.song_name = name;
     this.url = url;
-    this.url_type = url_type;
     this.user_id = user_id;
     this.uploadedDate = uploadedDate;
 };
@@ -40,7 +34,6 @@ module.exports.saveSong = function (newSong, callback) {
         user_id: newSong.user_id,
         song_name: newSong.song_name,
         url: newSong.url,
-        url_type: newSong.url_type,
         uploadedDate: date
     };
     conn.query("INSERT INTO SONGS SET ?", song, function (err, result) {

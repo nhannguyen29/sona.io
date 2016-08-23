@@ -18,13 +18,11 @@ router.post('/upload', function(req, res, next) {
     // Get input values
     var user_id = req.user.id;
     var songName = req.body.song_name;
-    var urlType = req.body.type;
     var url      = req.body.url;
 
     // Form Validation
     req.checkBody('song_name', 'Song needs a name.').notEmpty();
-    req.checkBody('type', 'Need a type.').notEmpty();
-    req.checkBody('url'     , 'Need a url.').notEmpty();
+    
     errors = req.validationErrors();
 
     if (errors) {
@@ -35,7 +33,7 @@ router.post('/upload', function(req, res, next) {
     else {
         console.log('Uploading new song...');
         var date = new Date();
-        var newSong = new Song(user_id, songName, url, urlType, date);
+        var newSong = new Song(user_id, songName, url, date);
         Song.saveSong(newSong, function(err, result){
             if (err) console.log(err);
             else  {
