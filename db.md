@@ -14,13 +14,12 @@ CREATE TABLE users (
 # Create Songs Table
 ```
 CREATE TABLE songs (
-  song_id int(11) NOT NULL AUTO_INCREMENT,
+  id int(11) NOT NULL AUTO_INCREMENT,
   song_name varchar(50) NOT NULL,
   user_id int(11) NOT NULL,
   url varchar(255) NOT NULL,
-  url_type varchar(50) NOT NULL,
   uploadedDate datetime DEFAULT NULL,
-  PRIMARY KEY (song_id),
+  PRIMARY KEY (id),
   KEY user_id (user_id),
   CONSTRAINT songs_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
