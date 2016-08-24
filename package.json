@@ -21,11 +21,12 @@
     "body-parser": "*",
     "connect-flash": "*",
     "cookie-parser": "*",
+    "crypto": "0.0.3",
     "debug": "*",
     "express": "*",
     "express-handlebars": "*",
     "express-messages": "*",
-    "express-session": "*",
+    "express-session": "^1.14.1",
     "express-validator": "*",
     "moment": "^2.14.1",
     "morgan": "*",
@@ -36,7 +37,6 @@
     "passport-local": "*",
     "path": "^0.12.7",
     "pug": "*",
-    "serve-favicon": "*",
-    "crypto": "*"
+    "serve-favicon": "*"
   }
 }

@@ -36,8 +36,8 @@ module.exports.saveSong = function (newSong, callback) {
 };
 
 module.exports.getLatestSongs = function (callback) {
-    console.log("SELECT * FROM SONGS ORDER BY uploadedDate DESC");
-    conn.query("SELECT * FROM SONGS ORDER BY uploadedDate DESC", function (err, rows, fields) {
+    console.log("SELECT * FROM SONGS s INNER JOIN USERS u ON s.user_id = u.id ORDER BY uploadedDate DESC");
+    conn.query("SELECT * FROM SONGS s INNER JOIN USERS u ON s.user_id = u.id ORDER BY uploadedDate DESC", function (err, rows, fields) {
         if (err) throw err;
         else {
             callback(err,rows);
