@@ -36,6 +36,7 @@
     "passport-local": "*",
     "path": "^0.12.7",
     "pug": "*",
-    "serve-favicon": "*"
+    "serve-favicon": "*",
+    "crypto": "*"
   }
 }

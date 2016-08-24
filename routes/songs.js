@@ -3,8 +3,22 @@ var router = express.Router();
 var User = require('../models/user');
 var Song = require('../models/song');
 var passport = require('passport');
+var path = require('path');
 var multer = require('multer');
-var upload = multer({ dest: 'public/uploads/songs/' });
+var crypto = require('crypto');
+
+var storage = multer.diskStorage({
+  destination: 'public/uploads/songs/',
+  filename: function (req, file, cb) {
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err)
+
+      cb(null, raw.toString('hex') + path.extname(file.originalname));
+    });
+  }
+});
+
+var upload = multer({ storage: storage });
 
 router.get('/', function(req, res, next) {
     Song.getLatestSongs(function(err,rows) {
@@ -25,13 +39,18 @@ router.post('/upload', upload.single('song_file'), function(req, res, next) {
     var user_id     = req.user.id;
     var songName    = req.body.song_name;
     var songFile;
+
     if (req.file)
     {
-        songFile    = req.file.filename;
+        songFile = req.file.filename;
+    }
+    else // a work around for checking empty file issue. TODO: find a better way
+    {
+        req.checkBody('song_file', 'No file uploaded').notEmpty();
     }
     // Form Validation
     req.checkBody('song_name', 'Song needs a name.').notEmpty();
-//    req.checkBody('song_file', 'No file uploaded').notEmpty();
+    
 
     errors = req.validationErrors();
 
@@ -53,7 +72,7 @@ router.post('/upload', upload.single('song_file'), function(req, res, next) {
         });
         req.flash('success_msg', "You have successfully uploaded the song.");
    
-        res.redirect('/');        
+        res.redirect('/songs');        
     }// console.log(req.user);
        // console.log(req.file);
 });
