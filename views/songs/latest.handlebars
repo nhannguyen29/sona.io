@@ -1,0 +1,16 @@
+{{# if latestSongs}}
+    <h3>Latest Songs</h3>
+    <ul style="list-style: none;">
+        {{# each latestSongs}}
+            <li>
+                <h5>{{song_name}}</h5>
+                <h7>By {{user_id}}</h7>
+                <audio class="player" controls>
+                    <source src="/uploads/songs/{{song_file}}.mp3" type="audio/mpeg">
+                </audio>
+            </li> <br/>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>No new songs or something went wrong</p>
+{{/if}}

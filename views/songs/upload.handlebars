@@ -6,11 +6,15 @@
 		</div>
 	{{/each}}
 {{/if}}
-<form id="uploadForm" method="post" action="/songs/upload">
+<form id="uploadForm" enctype="multipart/form-data" method="post" action="/songs/upload">
 	<div>
 		<label>Song name: </label>
 		<input type="text" name="song_name" value="{{song_name}}">
 	</div><br />
+	<div>
+		<label>File: </label>
+		<input type="file" name="song_file" value="{{song_file}}">
+	</div> <br/>
 	<div>
 		<input type="submit" value="Upload">
 	</div>

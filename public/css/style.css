@@ -160,3 +160,8 @@ form label {
 	display: inline-block;
 	width: 180px;
 }
+
+.player {
+	width: 100%;
+	height: 50px;
+}

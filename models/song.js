@@ -1,4 +1,5 @@
 var conn = require('../db');
+var moment = require('moment');
 
 function twoDigits(d) {
     if (0 <= d && d < 10) return "0" + d.toString();
@@ -11,9 +12,9 @@ var toMysqlFormat = function () {
     return date.getUTCFullYear() + "-" + twoDigits(1 + date.getUTCMonth()) + "-" + twoDigits(date.getUTCDate()) + " " + twoDigits(date.getUTCHours()) + ":" + twoDigits(date.getUTCMinutes()) + ":" + twoDigits(date.getUTCSeconds());
 };
 
-var Song = function (user_id, name, url, uploadedDate) {
-    this.song_name = name;
-    this.url = url;
+var Song = function (user_id, song_name, song_file, uploadedDate) {
+    this.song_name = song_name;
+    this.song_file = song_file;
     this.user_id = user_id;
     this.uploadedDate = uploadedDate;
 };
@@ -26,7 +27,7 @@ module.exports.saveSong = function (newSong, callback) {
     var song = {
         user_id: newSong.user_id,
         song_name: newSong.song_name,
-        url: newSong.url,
+        song_file: newSong.song_file,
         uploadedDate: date
     };
     conn.query("INSERT INTO SONGS SET ?", song, function (err, result) {
@@ -34,12 +35,13 @@ module.exports.saveSong = function (newSong, callback) {
     });
 };
 
-module.exports.getLatestSongs = function (id, callback) {
-    console.log("SELECT * FROM USERS WHERE id = " + "'" + id + "'");
-    conn.query("SELECT * FROM USERS WHERE id = " + "'" + id + "'", function (err, rows, fields) {
+module.exports.getLatestSongs = function (callback) {
+    console.log("SELECT * FROM SONGS ORDER BY uploadedDate DESC");
+    conn.query("SELECT * FROM SONGS ORDER BY uploadedDate DESC", function (err, rows, fields) {
         if (err) throw err;
         else {
-            callback(err, rows[0]);
+            callback(err,rows);
+            
         }
     });
 };
