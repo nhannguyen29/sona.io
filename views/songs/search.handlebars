@@ -1,0 +1,20 @@
+{{# if resultSongs}}
+    <h3>Search result</h3>
+    <ul style="list-style: none;">
+        {{# each resultSongs}}
+            <li>
+                <h5>{{song_name}}</h5>
+                <h7>By {{username}}</h7>
+                <audio class="player" controls>
+                    <source src="/uploads/songs/{{song_file}}" type="audio/mpeg">
+                </audio>
+            </li> <br/>
+            {{# if ../user}}
+                <button id="btn_{{song_id}}" class="btn btn-primary" onclick="like({{song_id}}, {{../user.id}})">Like</button>
+            {{else}}
+            {{/if}}
+        {{/each}}
+    </ul>
+{{else}}
+    <p>No new songs or something went wrong</p>
+{{/if}}

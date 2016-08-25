@@ -1,6 +1,12 @@
 {{#if user}}
 	<h5>Welcome Back, {{user.username}}</h5>
 	<ul class="alt">
+        <li>
+            <form action="/songs/search" method="post">
+                <input type="text" name="keyword" value={{keyword}}>
+                <button class="medium"><i class="fa fa-search"></i>Search</button>
+            </form>
+        </li>
 	    <li><a href="/songs/mostfav">Most Favorite</a></li>
         <li><a href="/songs/upload">Upload a song</a></li>
 	    <li><a href="/users/logout">Logout</a></li>

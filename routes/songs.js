@@ -96,5 +96,18 @@ router.post('/like/:song_id/:user_id', function (req, res, next) {
     req.flash('success_msg', "Successfully liked the song.");
 });
 
+router.post('/search', function (req, res, next)
+{
+    var keyword = req.body.keyword;
+
+    if (keyword)
+    {
+        Song.searchSongByKeyword(keyword, function (err, rows) {
+            res.render('songs/search', {
+                resultSongs: rows
+            })
+        });
+    }
+});
 
 module.exports = router;

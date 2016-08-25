@@ -60,9 +60,21 @@ module.exports.getMostFavorite = function(callback) {
                 s.song_file, s.song_name, s.uploadedDate, s.user_id \
                 from songs s join reactions r on s.id = r.song_id \
                 join users u on s.user_id = u.id \
-                group by s.id order by like_count desc;"
+                group by s.id order by like_count desc;";
     console.log(query);
     conn.query(query, function(err, rows, fields){
+        if (err) throw err;
+        else {
+            callback(err, rows);
+        }
+    });
+};
+
+module.exports.searchSongByKeyword = function(keyword, callback) {
+    var query = "SELECT s.id as song_id, s.song_name, s.song_file, s.uploadedDate, u.id as user_id, u.username \
+                 FROM SONGS s INNER JOIN USERS u ON s.user_id = u.id WHERE song_name LIKE '%" + keyword + "%';";
+
+    conn.query(query, function(err, rows, fields) {
         if (err) throw err;
         else {
             callback(err, rows);
