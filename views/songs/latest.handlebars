@@ -9,8 +9,26 @@
                     <source src="/uploads/songs/{{song_file}}" type="audio/mpeg">
                 </audio>
             </li> <br/>
+            {{# if ../user}}
+                <button id="btn_{{song_id}}" class="btn btn-primary" onclick="like({{song_id}}, {{../user.id}})">Like</button>
+            {{else}}
+            {{/if}}
         {{/each}}
     </ul>
+    <script language="javascript">
+        function like(song_id, user_id) {
+            var url_like = "/songs/like/" + song_id + "/" + user_id;
+            $.ajax({
+                url: url_like,
+                type: "POST",
+                success: function(result) {}
+            });
+            var btn = "#btn_" + song_id;
+            $(btn).removeClass("btn-primary");
+            $(btn).addClass("medium green");
+            $(btn).html("Liked");
+        };
+    </script>
 {{else}}
     <p>No new songs or something went wrong</p>
 {{/if}}

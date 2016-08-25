@@ -35,13 +35,22 @@ module.exports.saveSong = function (newSong, callback) {
     });
 };
 
+module.exports.likeSong = function (song_id, user_id, callback){
+    console.log("User "+ user_id + " liked song " + song_id + ".\n");
+    var likeQuery = "INSERT INTO REACTIONS (song_id, user_id) VALUES (" + song_id + ", " + user_id + ")";
+    conn.query(likeQuery, function(err, result){
+        callback(err, result);
+    });
+};
+
 module.exports.getLatestSongs = function (callback) {
-    console.log("SELECT * FROM SONGS s INNER JOIN USERS u ON s.user_id = u.id ORDER BY uploadedDate DESC");
-    conn.query("SELECT * FROM SONGS s INNER JOIN USERS u ON s.user_id = u.id ORDER BY uploadedDate DESC", function (err, rows, fields) {
+    var query = "SELECT s.id as song_id, s.song_name, s.song_file, s.uploadedDate, u.id as user_id, u.username \
+                 FROM SONGS s INNER JOIN USERS u ON s.user_id = u.id ORDER BY uploadedDate DESC";
+    console.log(query);
+    conn.query(query, function (err, rows, fields) {
         if (err) throw err;
         else {
             callback(err,rows);
-            
         }
     });
 };
