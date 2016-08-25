@@ -10,7 +10,7 @@
                 </audio>
             </li> <br/>
             {{# if ../user}}
-                <button id="btn_{{song_id}}" class="btn btn-primary" onclick="like({{song_id}}, {{../user.id}})">Like</button>
+                <button id="btn_{{song_id}}" class="btn btn-primary" onclick="like_no_count({{song_id}}, {{../user.id}})">Like</button>
             {{else}}
             {{/if}}
         {{/each}}
