@@ -56,9 +56,10 @@ module.exports.getLatestSongs = function (callback) {
 };
 
 module.exports.getMostFavorite = function(callback) {
-    var query = "select s.id as song_id, count(s.id) as like_count, \
+    var query = "select s.id as song_id, count(s.id) as like_count, u.username,\
                 s.song_file, s.song_name, s.uploadedDate, s.user_id \
                 from songs s join reactions r on s.id = r.song_id \
+                join users u on s.user_id = u.id \
                 group by s.id order by like_count desc;"
     console.log(query);
     conn.query(query, function(err, rows, fields){
