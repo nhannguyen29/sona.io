@@ -100,14 +100,11 @@ router.post('/search', function (req, res, next)
 {
     var keyword = req.body.keyword;
 
-    if (keyword)
-    {
-        Song.searchSongByKeyword(keyword, function (err, rows) {
-            res.render('songs/search', {
-                resultSongs: rows
-            })
+    Song.searchSongByKeyword(keyword, function (err, rows) {
+        res.render('songs/search', {
+            resultSongs: rows
         });
-    }
+    });
 });
 
 module.exports = router;
