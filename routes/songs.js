@@ -88,4 +88,11 @@ router.post('/like/:song_id/:user_id', function (req, res, next) {
     req.flash('success_msg', "Successfully liked the song.");
 });
 
+router.get('mostfavorite', function(req, res, next) {
+    Song.getMostFavorite(function(err,rows) {
+        res.redirect('/songs/mostfavorite', {
+            mostFavSongs: rows 
+        });
+    });
+});
 module.exports = router;
